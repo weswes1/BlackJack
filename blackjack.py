@@ -1,7 +1,7 @@
 import random
 
 
-suit=[2,3,4,5,6,7,8,9,10,"JACK","QUEEN","KING","ACE"]
+suit=[2,3,4,5,6,7,8,9,10,"J","Q","K","A"]
 gdeck=suit*4
 random.shuffle(gdeck)
 
@@ -16,9 +16,8 @@ class dealer:
 		self.hand=hand
 
 	def distributeCard(self):
-		distributed = self.deck.pop()
-		return distributed
-		#return deck[]
+		return self.deck.pop()
+		
 
 
 def initializePlayer():
@@ -33,32 +32,65 @@ def initializePlayer():
 
 
 def play():
-	anewdealer=dealer(random.shuffle(gdeck),"")
-	if (askplay()==True):
-		anewplayer = initializePlayer()
-		print ("a new player has ${} in funds".format(anewplayer.funds))
-		bet = askbet(anewplayer)
+	anewdealer=dealer(random.shuffle(gdeck))
+	while (True):
+		if (askplay()==True):
+			anewplayer = initializePlayer()
+			print ("a new player has ${} in funds".format(anewplayer.funds))
+			bet = askbet(anewplayer)
 
-		dealer_sum=0
-		player_sum=0
+			dealer_sum=0
+			player_sum=0
 
-		for i in range(0,2):
-			dealersum+=
-			anewplayer.hand.append()
-			anewdealer.hand.append(anewdealer.distributeCard())
-	
+			print(anewdealer.distributeCard())
+			print(type(anewdealer.distributeCard()))
 
-		while (not over21(dealer_sum) and not over21(player_sum)):
-			pass
+			card_1 = anewdealer.distributeCard()
+			card_2 = anewdealer.distributeCard()
+			dealer_sum=card_1+card_2
+			anewdealer.hand.append(conver(card_1))
+			anewdealer.hand.append(conver(card_2))
+
+			card_3 = anewdealer.distributeCard()
+			card_4 = anewdealer.distributeCard()
+			player_sum = card_3+card_4
+			anewplayer.hand.append(conver(card_1))
+			anewplayer.hand.append(conver(card_2))
 
 
+			print ("Your hand is: {}. ".format(anewplayer.hand))
+			print ("The dealer is showing a {} face up and another card face down.".format(anewdealer.hand[0]))
+
+			# If player_sum is 21, The game is over. Add funds, 
+			if (player_sum == 21):
+				anewplayer.funds+=bet
+				print ("a new player has a BlackJack. ${} added to funds".format(bet))
+				break
 
 
-	# The player doesn't want to play
+			# elif ()
+
+
+		# The player doesn't want to play
+		else:
+			print("Not playing")
+			break
+
+
+def convert(card):
+	if (card=="K" or card=="Q" or card=="J"):
+		return 10
+	elif (card=="A"):
+		choose = 0
+		while (choose!= 1 or choose!=11):
+			choose = input("Would you like to choose a value of 11 or 1 for your Ace? ")
+			int(choose)
+			if (choose==11):
+				return 11
+			elif (choose==1):
+				return 1
 	else:
-		print("Not playing")
-		pass
-
+		return card
 
 
 def askplay():
@@ -99,7 +131,7 @@ def askbet(player):
 	return bet;
 
 
-# play()
+play()
 
 def over21(num):
 	return num > 21
@@ -110,32 +142,36 @@ def over21(num):
 
 
 
-
-
-"""
 aplayer = player()
-frank = dealer(gdeck);
-#nprint(frank.deck)
-print("number of cards in dealer's deck: \n")
-print(len(frank.deck))
-print("number of cards in dealer's hand: \n")
-print(len(frank.hand))
-print("number of cards in player's hand: \n")
-print(len(aplayer.hand))
-
 card_1 = frank.distributeCard()
+
+
+frank = dealer(gdeck);
+
+#print("number of cards in dealer's deck: \n")
+#print(len(frank.deck))
+#print("number of cards in dealer's hand: \n")
+#print(len(frank.hand))
+#print("number of cards in player's hand: \n")
+#print(len(aplayer.hand))
+
+
 card_2 = frank.distributeCard()
 
-frank.hand.append(card_1)
-aplayer.hand.append(card_2)
+print(card_1)
+print(card_2)
+print(type(card_1))
+print(type(card_2))
+
+frank.hand.append(convert(card_1))
+aplayer.hand.append(convert(card_2))
 
 sum = card_1+card_2
 
-print("the dealer distributed a card to himself and a player... ")
-print("number of cards in deck: \n")
-print(len(frank.deck))
-print("number of cards in dealer's hand: \n")
-print(len(frank.hand))
-print("number of cards in player's hand: \n")
-print(len(frank.hand))
-"""
+#print("the dealer distributed a card to himself and a player... ")
+#print("number of cards in deck: \n")
+#print(len(frank.deck))
+#print("number of cards in dealer's hand: \n")
+#print(len(frank.hand))
+#print("number of cards in player's hand: \n")
+#print(len(frank.hand))
