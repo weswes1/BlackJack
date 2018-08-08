@@ -7,6 +7,9 @@ random.shuffle(gdeck)
 
 class player:
 	def __init__(self,funds=0,hand=[]):
+		funds=-1
+		while (type(funds)!=float or funds<0):
+			funds = float(input("Enter the number of funds you would like to add to play with: "))
 		self.funds = funds
 		self.hand = hand
 
@@ -18,24 +21,12 @@ class dealer:
 	def distributeCard(self):
 		return self.deck.pop()
 		
-
-
-def initializePlayer():
-	newplayer=player()
-	funds=-1
-	while (type(funds)!=float or newplayer.funds<0):
-		funds = float(input("Enter the number of funds you would like to add to play with: "))
-
-	newplayer.funds = funds
-	return newplayer
-
-
-
 def play():
-	anewdealer=dealer(random.shuffle(gdeck))
 	while (True):
 		if (askplay()==True):
-			anewplayer = initializePlayer()
+			anewplayer = player()
+			anewdealer=dealer(gdeck)
+
 			print ("a new player has ${} in funds".format(anewplayer.funds))
 			bet = askbet(anewplayer)
 
