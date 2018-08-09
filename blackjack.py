@@ -9,7 +9,7 @@ class player:
 	def __init__(self,funds=0,hand=[]):
 		funds=-1
 		while (type(funds)!=float or funds<0):
-			funds = float(input("Enter the number of funds you would like to add to play with: "))
+			funds = float(input("Enter the number of funds you would like to play with: "))
 		self.funds = funds
 		self.hand = hand
 
@@ -33,35 +33,46 @@ def play():
 			dealer_sum=0
 			player_sum=0
 
-			print(anewdealer.distributeCard())
-			print(type(anewdealer.distributeCard()))
 
 			card_1 = anewdealer.distributeCard()
 			card_2 = anewdealer.distributeCard()
-			dealer_sum=card_1+card_2
-			anewdealer.hand.append(conver(card_1))
-			anewdealer.hand.append(conver(card_2))
-
 			card_3 = anewdealer.distributeCard()
 			card_4 = anewdealer.distributeCard()
-			player_sum = card_3+card_4
-			anewplayer.hand.append(conver(card_1))
-			anewplayer.hand.append(conver(card_2))
+
+			anewplayer.hand.append(card_1)
+			anewplayer.hand.append(card_2)
+			anewdealer.hand.append(card_3)
+			anewdealer.hand.append(card_4)
 
 
-			print ("Your hand is: {}. ".format(anewplayer.hand))
+			ccard_1 = convert(card_1)
+			ccard_2 = convert(card_2)
+			ccard_3 = convert(card_3)
+			ccard_4 = convert(card_4)
+
+			player_sum = ccard_3+ccard_4
+			print()
+
+			dealer_sum=ccard_1+ccard_2
+
+			print ("Your hand is: {}. The total of this hand is {}".format(anewplayer.hand,player_sum))
 			print ("The dealer is showing a {} face up and another card face down.".format(anewdealer.hand[0]))
 
-			# If player_sum is 21, The game is over. Add funds, 
-			if (player_sum == 21):
-				anewplayer.funds+=bet
-				print ("a new player has a BlackJack. ${} added to funds".format(bet))
-				break
+
+			while (player_sum <= 21):
+				if (player_sum==21):
+					anewplayer.funds+=bet
+					print ("a new player has a BlackJack. ${} added to funds".format(bet))
+					pass
+
+					if(hitstand()=="hit"):
+						print("You have requested a hit.")
+						card_5 = anewdealer.distributeCard()
+						pass
 
 
-			# elif ()
-
-
+					elif(hitstand()=="stand"):
+						pass
 		# The player doesn't want to play
 		else:
 			print("Not playing")
@@ -127,42 +138,5 @@ play()
 def over21(num):
 	return num > 21
 
-
-
-
-
-
-
-aplayer = player()
-card_1 = frank.distributeCard()
-
-
-frank = dealer(gdeck);
-
-#print("number of cards in dealer's deck: \n")
-#print(len(frank.deck))
-#print("number of cards in dealer's hand: \n")
-#print(len(frank.hand))
-#print("number of cards in player's hand: \n")
-#print(len(aplayer.hand))
-
-
-card_2 = frank.distributeCard()
-
-print(card_1)
-print(card_2)
-print(type(card_1))
-print(type(card_2))
-
-frank.hand.append(convert(card_1))
-aplayer.hand.append(convert(card_2))
-
-sum = card_1+card_2
-
-#print("the dealer distributed a card to himself and a player... ")
-#print("number of cards in deck: \n")
-#print(len(frank.deck))
-#print("number of cards in dealer's hand: \n")
-#print(len(frank.hand))
-#print("number of cards in player's hand: \n")
-#print(len(frank.hand))
+def under21(num):
+	return num < 21
